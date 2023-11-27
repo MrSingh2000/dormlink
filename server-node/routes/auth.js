@@ -48,7 +48,7 @@ router.post("/register", async (req, res) => {
     user = await User.create({
       fullName,
       rollNum,
-      password,
+      password: hashpass,
       email,
       phoneNum,
     });
@@ -67,3 +67,5 @@ router.post("/register", async (req, res) => {
     res.json({ error: "Server Error in Register route" });
   }
 });
+
+module.exports = router;
