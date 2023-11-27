@@ -1,29 +1,20 @@
 import "./App.css";
-import {
-  createBrowserRouter,
-  Route,
-  RouterProvider,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Contact from "./components/Contact";
-
-const router = createBrowserRouter([
-  { path: "/", Component: Home },
-  { path: "*", Component: Root },
-]);
+import RoomChart from "./components/hostel/RoomChart";
 
 function App() {
   return;
-  <RouterProvider router={router} />;
-}
-
-function Root() {
-  return (
-    <Routes>
-      <Route path="/contact" element={<Contact />} />
-    </Routes>
-  );
+  <>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/hostel/roomchart" element={<RoomChart />} />
+      </Routes>
+    </Router>
+  </>;
 }
 
 export default App;
