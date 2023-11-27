@@ -2,15 +2,17 @@ const express = require("express");
 const { check } = require("express-validator");
 const router = express.Router();
 const User = require("../models/User");
+const Admin = require("../models/Admin01");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-// POST route to login existing user
-router.post("/login", async (req, res) => {
+const loginUser = async (req, res, Model, type) => {
   try {
-    let { roll, password } = req.body;
-    let user = await User.findOne({ roll });
+    let { roll, password, email } = req.body;
+    let user;
+    if (type == "user") user = await Model.findOne({ roll });
+    else user = await Model.findOne({ email });
 
     if (!user) return { error: "User not found in database" };
 
@@ -20,52 +22,80 @@ router.post("/login", async (req, res) => {
     const data = {
       user: {
         id: user.id,
-        rollNum: user.rollNum,
+        type,
       },
     };
     const authToken = jwt.sign(data, process.env.JWT_SECRET);
     res.json({ authToken });
   } catch (error) {
-    console.log("Server Error in login Route");
+    if (type == "user") console.log("Server Error in user login Route");
+    else console.log("Server Error in Admin Login Route");
   }
+};
+
+// POST route to login existing user
+router.post("/login", async (req, res) => {
+  await loginUser(req, res, User, 'user');
 });
 
-// POST route to register new user
-router.post("/register", async (req, res) => {
+// Route for admin login
+router.post('/admin/login', async (req, res) => {
+  await loginUser(req, res, Admin, 'admin');
+})
+
+const registerUser = async (req, res, Model, type) => {
   try {
     let { fullName, rollNum, password, email, phoneNum } = req.body;
-    // check if user already exists
-    let user = await User.findOne({ rollNum });
-    if (user) {
-      res.status(401).json({ error: "User already Exists" });
-      return;
-    }
+    let user;
+    if (type == "user") user = Model.findOne({ rollNum });
+    else user = Model.findOne({ email });
+
+    if (user) return res.send(401).json({ error: "User already Exists" });
 
     // encrypting the password
     let salt = await bcrypt.genSalt(10);
     let hashpass = await bcrypt.hash(password, salt);
 
-    user = await User.create({
-      fullName,
-      rollNum,
-      password: hashpass,
-      email,
-      phoneNum,
-    });
+    if (type == "user") {
+      user = await Model.create({
+        fullName,
+        rollNum,
+        password: hashpass,
+        email,
+        phoneNum,
+      });
+    } else {
+      user = await Model.create({
+        password: hashpass,
+        email,
+      });
+    }
+
     user.save();
-    // generating and sending auth token
+
     let data = {
       user: {
         id: user.id,
-        rollNum: user.rollNum,
+        type,
       },
     };
     const authToken = jwt.sign(data, jwtToken);
-
     res.json({ authToken });
   } catch (error) {
-    res.json({ error: "Server Error in Register route" });
+    if (type == "user")
+      res.json({ error: "Server Error in Register user route" });
+    else res.json({ error: "Server Error in Register admin route" });
   }
+};
+
+// POST route to register new user
+router.post("/register", async (req, res) => {
+  await registerUser(req, res, User, "user");
+});
+
+// Route to get admin access
+router.post("/admin/register", async (req, res) => {
+  await registerUser(req, res, Admin, "admin");
 });
 
 module.exports = router;
