@@ -7,11 +7,19 @@ const documentSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
   },
+
+  rollNum: {
+    type: Number
+  },
+
   docs: [
     {
       type: String,
     },
   ],
+  verified: {
+    type: Boolean
+  }
 });
 
 // name of the collection is 'user'
