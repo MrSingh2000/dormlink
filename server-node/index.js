@@ -12,6 +12,7 @@ connectToMongo();
 
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/docs', require('./routes/docs'));
+app.use('/api/admin', require('./routes/admin'));
 
 app.listen(port, () => {
     console.log(`BACKEND RUNNING on http://localhost:${port}`);

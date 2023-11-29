@@ -14,10 +14,11 @@ const loginUser = async (req, res, Model, type) => {
     if (type == "user") user = await Model.findOne({ roll });
     else user = await Model.findOne({ email });
 
-    if (!user) return { error: "User not found in database" };
+    if (!user) return res.status(401).json({ error: "User not found in database" });
 
     let passCompare = bcrypt.compare(password, user.password);
-    if (!passCompare) return { error: "Invalid Credentials" };
+    if (!passCompare)
+      return res.status(401).json({ error: "Invalid Credentials" });
 
     const data = {
       user: {
@@ -35,22 +36,22 @@ const loginUser = async (req, res, Model, type) => {
 
 // POST route to login existing user
 router.post("/login", async (req, res) => {
-  await loginUser(req, res, User, 'user');
+  await loginUser(req, res, User, "user");
 });
 
 // Route for admin login
-router.post('/admin/login', async (req, res) => {
-  await loginUser(req, res, Admin, 'admin');
-})
+router.post("/admin/login", async (req, res) => {
+  await loginUser(req, res, Admin, "admin");
+});
 
 const registerUser = async (req, res, Model, type) => {
   try {
     let { fullName, rollNum, password, email, phoneNum } = req.body;
     let user;
-    if (type == "user") user = Model.findOne({ rollNum });
-    else user = Model.findOne({ email });
+    if (type == "user") user = await Model.findOne({ rollNum });
+    else user = await Model.findOne({ email });
 
-    if (user) return res.send(401).json({ error: "User already Exists" });
+    if (user) return res.status(401).json({ error: "User already Exists" });
 
     // encrypting the password
     let salt = await bcrypt.genSalt(10);
@@ -79,11 +80,12 @@ const registerUser = async (req, res, Model, type) => {
         type,
       },
     };
-    const authToken = jwt.sign(data, jwtToken);
+    const authToken = jwt.sign(data, process.env.JWT_SECRET);
     res.json({ authToken });
   } catch (error) {
+    console.log("error: ", error);
     if (type == "user")
-      res.json({ error: "Server Error in Register user route" });
+      return res.json({ error: "Server Error in Register user route" });
     else res.json({ error: "Server Error in Register admin route" });
   }
 };

@@ -24,6 +24,8 @@ router.post("/save", [upload.array("files"), fetchuser], async (req, res) => {
     await Doc.create({
       userId: user._id,
       docs: req.files,
+      rollNum: user.rollNum,
+      verified: false
     });
 
     res.status(200).json({ message: "Upload successful!" });
