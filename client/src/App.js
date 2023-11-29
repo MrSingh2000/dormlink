@@ -1,28 +1,15 @@
-import "./App.css";
-import {
-  createBrowserRouter,
-  Route,
-  RouterProvider,
-  Routes,
-} from "react-router-dom";
-import Home from "./components/Home";
-import Contact from "./components/Contact";
-
-const router = createBrowserRouter([
-  { path: "/", Component: Home },
-  { path: "*", Component: Root },
-]);
+import './App.css';
+import Home from './components/Home';
+import Navbar from './components/Navbar';
+import LoginForm from './components/login';
+import SignupForm from './components/signup';
 
 function App() {
-  return;
-  <RouterProvider router={router} />;
-}
-
-function Root() {
   return (
-    <Routes>
-      <Route path="/contact" element={<Contact />} />
-    </Routes>
+    <div className="App">
+      <Navbar/>
+      <Home/>
+    </div>
   );
 }
 
