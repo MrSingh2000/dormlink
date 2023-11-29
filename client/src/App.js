@@ -1,20 +1,16 @@
-import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
-import Contact from "./components/Contact";
-import RoomChart from "./components/hostel/RoomChart";
+import './App.css';
+import Home from './components/Home';
+import Navbar from './components/Navbar';
+import LoginForm from './components/login';
+import SignupForm from './components/signup';
 
 function App() {
-  return;
-  <>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/hostel/roomchart" element={<RoomChart />} />
-      </Routes>
-    </Router>
-  </>;
+  return (
+    <div className="App">
+      <Navbar/>
+      <Home/>
+    </div>
+  );
 }
 
 export default App;
