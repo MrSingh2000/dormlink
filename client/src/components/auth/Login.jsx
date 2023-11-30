@@ -1,6 +1,6 @@
 // LoginForm.js
 import React from 'react';
-import loginImage from '../images/logo.png'; // Import your login image
+import loginImage from '../../images/logo.png'; // Import your login image
 
 const LoginForm = () => {
   return (

@@ -1,6 +1,6 @@
 // SignupForm.js
 import React from 'react';
-import signupImage from '../images/logo.png'; // Import your signup image
+import signupImage from '../../images/logo.png'; // Import your signup image
 
 const SignupForm = () => {
   return (
