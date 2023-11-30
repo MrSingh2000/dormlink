@@ -1,19 +1,30 @@
-import './App.css';
-import AdminDashboard from './components/AdminDashboard';
-import Home from './components/Home';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import LoginForm from './components/Login';
-import SignupForm from './components/SignUp';
+import "./App.css";
+import Home from "./components/Home";
+import Navbar from "./components/Navbar";
+import LoginForm from "./components/Login";
+import SignupForm from "./components/SignUp";
+import Error from "./components/error/ErrorEle";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AdminDashboard from "./components/AdminDashboard";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Navbar />,
+    errorElement: <Error />,
+    children: [{
+      path: "/",
+      element: <Home/>,},
+      {
+      path:"/admin",
+      element: <LoginForm/>,
+
+    }],
+  },
+]);
 
 function App() {
-  return (
-    <div className="App">
-      <Navbar/>
-      <AdminDashboard/>
-      <Footer/>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
