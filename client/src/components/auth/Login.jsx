@@ -5,9 +5,9 @@ import loginImage from '../../images/logo.png'; // Import your login image
 const LoginForm = () => {
   return (
     <div className="flex flex-col md:flex-row justify-center items-center h-screen bg-[#b3dee584] ">
-        <div className="flex flex-col md:flex-row justify-center items-center h-1/2 shadow-md bg-[#fae6b1] rounded px-8 pt-6 pb-8 mb-4">
+        <div className="flex flex-col md:flex-row justify-center items-center md:h-1/2 shadow-md bg-[#fae6b1] rounded px-12 pt-6 pb-8 mb-4 ">
       <div className="w-1/3 md:w-1/2">
-        <img src={loginImage} alt="Login" className="w-full hidden md:visible" />
+        <img src={loginImage} alt="Login" className=" visible" />
       </div>
       <div className="w-full md:w-1/2">
         <form className=" rounded px-8 pt-6 pb-8 mb-4">

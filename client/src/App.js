@@ -6,6 +6,7 @@ import LoginForm from "./components/auth/Login";
 import SignupForm from "./components/auth/Signup";
 import Error from "./components/error/ErrorEle";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AdminDashboard from "./components/AdminDashboard";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,14 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <SignupForm />,
   },
+  {
+    path: "/login",
+    element: <LoginForm />,
+  },
+  {
+    path: "/signup",
+    element: <SignupForm />
+  }
 ]);
 
 function App() {
