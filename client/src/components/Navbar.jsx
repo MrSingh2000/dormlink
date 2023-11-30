@@ -3,6 +3,8 @@ import logo from "../images/hostel.png";
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import { ToastContainer } from 'react-toastify';
+
 
 export default function Navbar() {
   const [openham, setOpenham] = useState(false);
@@ -48,9 +50,9 @@ export default function Navbar() {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M1 1h15M1 7h15M1 13h15"
                   />
                 </svg>
@@ -79,8 +81,6 @@ export default function Navbar() {
                     >
                       About
                     </Link>
-                  </li>
-                  <li>
                   </li>
                   <li>
                     <Link
@@ -132,6 +132,7 @@ export default function Navbar() {
           </div>
         </nav>
       </div>
+      
       <Outlet />
       <Footer />
     </>

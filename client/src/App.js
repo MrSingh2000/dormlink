@@ -7,6 +7,7 @@ import SignupForm from "./components/auth/Signup";
 import Error from "./components/error/ErrorEle";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AdminDashboard from "./components/AdminDashboard";
+import { ToastContainer } from "react-toastify";
 
 const router = createBrowserRouter([
   {
@@ -38,12 +39,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <SignupForm />
-  }
+    element: <SignupForm />,
+  },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;
