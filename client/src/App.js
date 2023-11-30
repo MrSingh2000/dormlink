@@ -7,7 +7,7 @@ import SignupForm from "./components/auth/Signup";
 import Error from "./components/error/ErrorEle";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AdminDashboard from "./components/AdminDashboard";
-import { ToastContainer } from "react-toastify";
+import AdminLogin from "./components/auth/admin/Login";
 
 const router = createBrowserRouter([
   {
@@ -34,12 +34,8 @@ const router = createBrowserRouter([
     element: <SignupForm />,
   },
   {
-    path: "/login",
-    element: <LoginForm />,
-  },
-  {
-    path: "/signup",
-    element: <SignupForm />,
+    path: "/admin/login",
+    element: <AdminLogin />,
   },
 ]);
 
