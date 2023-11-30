@@ -1,11 +1,11 @@
 // SignupForm.js
 import React from 'react';
-import signupImage from '../images/logo.png'; // Import your signup image
+import signupImage from '../../images/logo.png'; // Import your signup image
 
 const SignupForm = () => {
   return (
     <div className="flex flex-col md:flex-row justify-center items-center h-screen bg-[#b3dee584] ">
-        <div className="flex flex-col md:flex-row justify-center items-center h-1/2 shadow-md bg-[#fae6b1] rounded px-8 pt-6 pb-8 mb-4">
+        <div className="flex flex-col md:flex-row justify-center items-center md:h-1/2 shadow-md bg-[#fae6b1] rounded px-8 pt-6 pb-8 ">
       <div className="w-1/3 md:w-1/2">
         <img src={signupImage} alt="Signup" className="w-full" />
       </div>

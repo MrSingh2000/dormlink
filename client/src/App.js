@@ -1,8 +1,8 @@
 import "./App.css";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
-import LoginForm from "./components/Login";
-import SignupForm from "./components/SignUp";
+import LoginForm from "./components/auth/Login";
+import SignupForm from "./components/auth/Signup";
 import Error from "./components/error/ErrorEle";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AdminDashboard from "./components/AdminDashboard";
@@ -12,15 +12,21 @@ const router = createBrowserRouter([
     path: "/",
     element: <Navbar />,
     errorElement: <Error />,
-    children: [{
-      path: "/",
-      element: <Home/>,},
+    children: [
       {
-      path:"/admin",
-      element: <LoginForm/>,
-
-    }],
+        path: "/",
+        element: <Home />,
+      },
+    ],
   },
+  {
+    path: "/login",
+    element: <LoginForm />,
+  },
+  {
+    path: "/signup",
+    element: <SignupForm />
+  }
 ]);
 
 function App() {
