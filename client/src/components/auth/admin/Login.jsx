@@ -1,27 +1,25 @@
 // LoginForm.js
 import React, { useState } from "react";
-import loginImage from "../../images/logo.png"; // Import your login image
+import loginImage from "../../../images/logo.png"; // Import your login image
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { updateLoading } from "../../redux/slices/loaderSlice";
 import axios from "axios";
-import { setAuthToken } from "../../redux/slices/authSlice";
-import { showToast } from "../../helper";
-import Loader from "../common/Loader";
+import { updateLoading } from "../../../redux/slices/loaderSlice";
+import { setAuthToken } from "../../../redux/slices/authSlice";
+import Loader from "../../common/Loader";
 
-const LoginForm = () => {
+const AdminLogin = () => {
   const dispatch = useDispatch();
   const loading = useSelector((store) => store.loading.value);
   const navigate = useNavigate();
 
   const [data, setData] = useState({
-    rollNum: null,
+    email: "",
     password: "",
   });
 
   const validateData = () => {
-    if (!data.rollNum || !data.password) return false;
-    if (data.rollNum.toString().length !== 11) return false;
+    if (!data.email || !data.password) return false;
     return true;
   };
 
@@ -40,11 +38,11 @@ const LoginForm = () => {
     dispatch(updateLoading());
     await axios({
       method: "POST",
-      url: `${process.env.REACT_APP_HOST}/api/auth/login`,
+      url: `${process.env.REACT_APP_HOST}/api/auth/admin/login`,
       data,
     })
       .then((res) => {
-        dispatch(setAuthToken({token: res.data.authToken, type: 'user'}));
+        dispatch(setAuthToken({ token: res.data.authToken, type: "admin" }));
         // showToast("Registeration Successfull!");
         dispatch(updateLoading());
         // TODO: add toastify here
@@ -53,6 +51,7 @@ const LoginForm = () => {
       .catch((error) => {
         // TODO: add toastify here
         // showToast("error", error.response.data);
+        console.log("error: ", error.response.data);
         dispatch(updateLoading());
       });
   };
@@ -72,15 +71,15 @@ const LoginForm = () => {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="username"
               >
-                Roll Number
+                Email
               </label>
               <input
                 onChange={(e) => handleChange(e)}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="username"
-                type="number"
-                name="rollNum"
-                placeholder="2000xxxxx11"
+                type="email"
+                name="email"
+                placeholder="demo@gmail.com"
               />
             </div>
             <div className="mb-6">
@@ -107,12 +106,6 @@ const LoginForm = () => {
               >
                 Sign In
               </button>
-              <Link
-                className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                to={"/signup"}
-              >
-                Don't have an account? Signup
-              </Link>
             </div>
           </form>
         </div>
@@ -121,4 +114,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default AdminLogin;
