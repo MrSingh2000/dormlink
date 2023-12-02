@@ -64,7 +64,7 @@ const RoomChart = () => {
         <h2 className="text-center bg-[#ffa101] p-4 my-4 rounded-xl text-xl font-bold text-white">
           Select Your Room
         </h2>
-        <div className="grid grid-cols-20 gap-2">
+        <div className="grid grid-cols-4 md:grid-cols-9 lg:grid-cols-20 gap-2">
           {allRooms.map((room) => {
             return (
               <Room
