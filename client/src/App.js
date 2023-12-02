@@ -8,6 +8,7 @@ import Error from "./components/error/ErrorEle";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AdminDashboard from "./components/AdminDashboard";
 import AdminLogin from "./components/auth/admin/Login";
+import RoomChart from "./components/hostel/RoomChart";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+      {
+        path: "/roomchart",
+        element: <RoomChart />
+      }
     ],
   },
   {
