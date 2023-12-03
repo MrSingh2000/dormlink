@@ -9,6 +9,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AdminDashboard from "./components/AdminDashboard";
 import AdminLogin from "./components/auth/admin/Login";
 import RoomChart from "./components/hostel/RoomChart";
+import Payment from "./components/payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/roomchart",
         element: <RoomChart />
+      },
+      {
+        path: "/payment",
+        element: <Payment />
       }
     ],
   },
