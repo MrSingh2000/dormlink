@@ -1,8 +1,5 @@
 import React from 'react'
 import avatar from '../images/avatar.png'
-import { Link } from 'react-router-dom'
-import check from '../images/check.png'
-import doc from '../images/folders.png'
 function AdminDashboard() {
   return (
     <div>
@@ -18,7 +15,6 @@ function AdminDashboard() {
         <div><button>Vaildate</button></div>
        </li>
     </ul>
-    
     </div>
   )
 }

@@ -5,10 +5,9 @@ import github from '../images/github.png'
 function Footer() {
   return (
     <div><footer className="px-4 divide-y bg-[#ffa101] text-white">
-	<div className="container flex flex-col justify-center md:justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0 ">
-        <div className='flex justify-center'>
-      <img src={logo} style={{ width:"20vh"}}className=" w-auto justify-center align-center " alt="Flowbite Logo" />
-      </div>
+	<div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0 ">
+        
+      <img src={logo} className=" h-20 w-auto " alt="Flowbite Logo" />
 		<div className="lg:w-1/3">
 			<a rel="noopener noreferrer" href="#" className="flex justify-center space-x-3 lg:justify-start ">
 				<div className="flex items-center justify-center w-12 h-12 rounded-full dark:bg-violet-400">
@@ -33,8 +32,8 @@ function Footer() {
 				</ul>
 			</div>
 			
-			<div className="space-y-3 flex flex-col justify-center">
-				<div className="uppercase font-bold justify-center text-center">Project Code</div>
+			<div className="space-y-3 ">
+				<div className="uppercase font-bold">Project Code</div>
 				<div className="flex justify-center space-x-3">
                 <a href='https://github.com/MrSingh2000/dormlink'>
                 <img src={github} className="hover:cursor-pointer" alt="github" />
