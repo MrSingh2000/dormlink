@@ -16,6 +16,8 @@ app.use('/api/docs', require('./routes/docs'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/room', require('./routes/room'));
 
+app.use('/api/payment', require('./routes/payment'));
+
 app.listen(port, () => {
     console.log(`BACKEND RUNNING on http://localhost:${port}`);
 })
