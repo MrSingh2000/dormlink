@@ -8,11 +8,15 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const fetchuser = require("../middlewares/fetchuser");
 require("dotenv").config();
+const mongoose = require("mongoose");
 
 // update the room number and others for any user
 router.post("/update", fetchuser, async (req, res) => {
   try {
     let { id } = req.user;
+    id = new mongoose.Types.ObjectId(id);
+    console.log(id);
+
     let { roomNum, hostel } = req.body;
     let user = await User.findById(id);
     if (!user) return res.status(401).json({ error: "Invalid Credentials" });
@@ -33,6 +37,7 @@ router.post("/update", fetchuser, async (req, res) => {
 
     res.json({ message: "Room allocated to the user successfully" });
   } catch (error) {
+    console.log(error);
     res.json({ error: "Server Error in Room Update route" });
   }
 });

@@ -8,22 +8,29 @@ import image2 from "../images/2.jpg";
 import image3 from "../images/3.jpg";
 import image4 from "../images/4.jpg";
 import image5 from "../images/5.jpg";
+import { setAuthToken } from "../redux/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const images = [image1, image2, image3, image4, image5];
 
 const HomePage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 5000); // Change the time (in milliseconds) to control image change interval
 
+    const authToken = localStorage.getItem("authToken");
+    if (authToken) dispatch(setAuthToken({ token: authToken, type: "user" }));
+
     return () => {
       clearInterval(interval);
     };
   }, []);
- const url ='https://mediafiles.botpress.cloud/0014d546-8e66-425d-bca2-e1ee392f697f/webchat/bot.html';
+  const url =
+    "https://mediafiles.botpress.cloud/0014d546-8e66-425d-bca2-e1ee392f697f/webchat/bot.html";
   return (
     <div className="relative">
       <div className="h-screen relative overflow-hidden">

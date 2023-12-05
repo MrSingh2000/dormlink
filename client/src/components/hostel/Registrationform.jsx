@@ -8,13 +8,10 @@ import Loader from "../common/Loader";
 import { updateLoading } from "../../redux/slices/loaderSlice";
 
 const HostelRegistrationForm = () => {
-  // let authToken = useSelector((store) => store.authToken.token);
+  let authToken = useSelector((store) => store.authToken.token);
   const loading = useSelector((store) => store.loading.value);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const authToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU2OGQ4M2Q2YzQ0ZjU5ODliNWIxMDM1IiwidHlwZSI6InVzZXIifSwiaWF0IjoxNzAxNzk3NDYwfQ.vAlrv7r6Nkmbi6p2ag1oDM4wOu8Nlt0No1DsLFzbk4g";
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -96,15 +93,17 @@ const HostelRegistrationForm = () => {
           }).then((response) => {
             console.log("response 2: ", response);
             dispatch(updateLoading());
-            navigate('/');
+            navigate("/roomchart");
           });
         })
         .catch((error) => {
+          alert("Error, Try again Later");
           console.log("error: ", error);
           dispatch(updateLoading());
         });
     } catch (error) {
       console.error("Error:", error);
+      alert("Error, Try again Later");
       dispatch(updateLoading());
     }
   };
