@@ -1,6 +1,6 @@
 // HomePage.js
 import React, { useState, useEffect } from "react";
-import bot from "../images/bot.png";
+import bot from '../images/chatbot.png';
 
 // Import your carousel images
 import image1 from "../images/1.jpg";
@@ -44,7 +44,7 @@ const HomePage = () => {
               />
             </div>
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className=" text-4xl text-center sm:text-white  text-[#31525b] text-shadow-md">
+              <div className=" text-4xl text-center text-white  text-shadow-md">
                 <b className="text-5xl drop-shadow-[0_35px_35px_rgba(0,0,1,5)] ">
                   Welcome to Our Hostel
                 </b>
@@ -56,12 +56,9 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <button
-        className="object-left sticky content-end  bottom-4 right-4 bg-[#31525b] text-white px-4 py-2 rounded-full shadow-md hover:bg-[#31525bb7]"
-        onClick={() => window.open(url, "_blank")}
-      >
-        <img src={bot} alt="bot" style={{ height: "10vh" }} />
-      </button>
+      <button className=" sticky content-end  left-10 bottom-10  drop-shadow-[0_35px_35px_rgba(0,0,1,5)]  text-white px-4 py-2 rounded-full   motion-safe:animate-bounce hover:animate-none" onClick={() => window.open(url, '_blank')} >
+        <img src={bot} alt="bot" className=" h-20 md:h-32 hover:h-40"/>
+  </button>
     </div>
   );
 };
