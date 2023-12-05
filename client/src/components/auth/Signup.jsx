@@ -52,8 +52,9 @@ const SignupForm = () => {
       data,
     })
       .then((res) => {
-        dispatch(setAuthToken({ token: res.data.authToken, type: "user" }));
         localStorage.setItem('authToken', res.data.authToken);
+        localStorage.setItem('type', "user");
+        dispatch(setAuthToken({ token: res.data.authToken, type: "user" }));
         // showToast("Registeration Successfull!");
         dispatch(updateLoading());
         // TODO: add toastify here

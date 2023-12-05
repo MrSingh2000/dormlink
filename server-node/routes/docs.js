@@ -7,6 +7,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const upload = require("../helpers/cloud");
 const fetchuser = require("../middlewares/fetchuser");
+const mongoose = require('mongoose');
+
 require("dotenv").config();
 
 router.post("/save", [upload.single("file"), fetchuser], async (req, res) => {

@@ -9,6 +9,8 @@ const upload = require("../helpers/cloud");
 const fetchuser = require("../middlewares/fetchuser");
 const Razorpay = require("razorpay");
 const uniqid = require("uniqid");
+const mongoose = require('mongoose');
+
 const { default: axios } = require("axios");
 
 require("dotenv").config();

@@ -7,6 +7,7 @@ const Doc = require("../models/Doc");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const fetchuser = require("../middlewares/fetchuser");
+const mongoose = require('mongoose');
 require("dotenv").config();
 
 // get all documents available on the database
@@ -24,6 +25,7 @@ router.get("/fetch", fetchuser, async (req, res) => {
     let data = await Doc.find();
     res.status(200).json(data );
   } catch (error) {
+    console.log(error)
     res.json({ error: "Server Error in fetch admin route" });
   }
 });

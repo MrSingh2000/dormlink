@@ -42,8 +42,9 @@ const AdminLogin = () => {
       data,
     })
       .then((res) => {
-        dispatch(setAuthToken({ token: res.data.authToken, type: "admin" }));
         localStorage.setItem('authToken', res.data.authToken);
+        localStorage.setItem('type', "admin");
+        dispatch(setAuthToken({ token: res.data.authToken, type: "admin" }));
         // showToast("Registeration Successfull!");
         dispatch(updateLoading());
         // TODO: add toastify here
