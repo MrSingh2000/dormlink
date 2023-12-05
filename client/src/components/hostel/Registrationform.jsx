@@ -4,8 +4,9 @@ import bg from '../../images/curiosity.png'
 
 const HostelRegistrationForm = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
     fullName: '',
+    email: '',
+    rollNumber: '',
     fathersName: '',
     mothersName: '',
     gender: 'male',
@@ -35,28 +36,41 @@ const HostelRegistrationForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Add your form submission logic here
+    try {
+      const response = await fetch('http://localhost:5000/api/submit-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await response.json();
+      console.log('Server Response:', data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
     console.log('Form submitted:', formData);
   };
 
   return (
-    <div style={{backgroundImage: `url(${bg})`, backgroundRepeat: "no-repeat", backgroundAttachment:"fixed", backgroundPosition:"center"}} className='bg-white'>
-    <div className="max-w-4xl mx-auto  p-6 bg-ffa101 text-white shadow-md rounded-xl bg-[#31525ba7]">
+    <div style={{backgroundImage: `url(${bg})`, backgroundRepeat: "no-repeat", backgroundAttachment:"fixed", backgroundPosition:"center"}} className='bg-white p-4'>
+    <div className="max-w-4xl mx-auto  p-6  text-white shadow-md rounded-xl bg-[#31525ba7]">
       <h2 className="text-4xl font-bold mb-4 text-center">Hostel Registration Form</h2>
       <form onSubmit={handleSubmit}>
         <div className='flex flex-row'>
-          <div className='w-1/2 flex flex-col-reverse'>
+          <div className='w-1/2 flex flex-col'>
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2" htmlFor="firstName">
+          <label className="block text-sm font-semibold mb-2" htmlFor="fullName">
             Full Name
           </label>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
+            id="fullName"
+            name="fullName"
+            value={formData.fullName}
             onChange={handleInputChange}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#ffa101] bg-white text-[#31525b]"
             required
@@ -64,14 +78,29 @@ const HostelRegistrationForm = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2" htmlFor="fullName">
+          <label className="block text-sm font-semibold mb-2" htmlFor="email">
+            Email
+          </label>
+          <input
+            type='email'
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#ffa101] bg-white text-[#31525b]"
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-semibold mb-2" htmlFor="rollNumber">
             Roll Number
           </label>
           <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            value={formData.fullName}
+            type="number"
+            id="rollNumber"
+            name="rollNumber"
+            value={formData.rollNumber}
             onChange={handleInputChange}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#ffa101] bg-white text-[#31525b]"
             required
@@ -250,7 +279,6 @@ const HostelRegistrationForm = () => {
             <input
               type="file"
               accept="image/*"
-              multiple
               className="hidden"
               onChange={(e) => setFormData({ ...formData, images: e.target.files })}
             />

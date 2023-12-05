@@ -10,6 +10,8 @@ import AdminDashboard from "./components/AdminDashboard";
 import AdminLogin from "./components/auth/admin/Login";
 import RoomChart from "./components/hostel/RoomChart";
 import Payment from "./components/payment/Payment";
+import HostelRegistrationForm from "./components/hostel/Registrationform";
+import About from "./components/About";
 
 const router = createBrowserRouter([
   {
@@ -26,12 +28,24 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
       {
+        path: "/about",
+        element: <About/>,
+      },
+      {
         path: "/roomchart",
         element: <RoomChart />
       },
       {
         path: "/payment",
         element: <Payment />
+      },
+      {
+        path: "/register",
+        element: <HostelRegistrationForm/>
+      },
+      {
+        path: "/admindashboard",
+        element: <AdminDashboard/>
       }
     ],
   },
