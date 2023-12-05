@@ -22,6 +22,9 @@ const HomePage = () => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 5000); // Change the time (in milliseconds) to control image change interval
 
+    const authToken = localStorage.getItem("authToken");
+    if (authToken) dispatch(setAuthToken({ token: authToken, type: "user" }));
+
     return () => {
       clearInterval(interval);
     };
