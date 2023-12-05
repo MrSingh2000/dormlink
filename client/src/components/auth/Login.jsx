@@ -16,7 +16,7 @@ const LoginForm = () => {
 
   const [data, setData] = useState({
     rollNum: null,
-    password: "",
+    password: null,
   });
 
   const validateData = () => {
@@ -35,7 +35,10 @@ const LoginForm = () => {
     e.preventDefault();
 
     // TODO: add toastify here
-    if (!validateData()) return;
+    if (!validateData()) {
+      alert("invalid data");
+      return;
+    }
 
     dispatch(updateLoading());
     await axios({
@@ -44,7 +47,7 @@ const LoginForm = () => {
       data,
     })
       .then((res) => {
-        dispatch(setAuthToken({token: res.data.authToken, type: 'user'}));
+        dispatch(setAuthToken({ token: res.data.authToken, type: "user" }));
         // showToast("Registeration Successfull!");
         dispatch(updateLoading());
         // TODO: add toastify here

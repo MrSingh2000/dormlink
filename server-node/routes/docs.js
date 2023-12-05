@@ -9,7 +9,7 @@ const upload = require("../helpers/cloud");
 const fetchuser = require("../middlewares/fetchuser");
 require("dotenv").config();
 
-router.post("/save", [upload.array("files"), fetchuser], async (req, res) => {
+router.post("/save", [upload.single("file"), fetchuser], async (req, res) => {
   try {
     let user = req.user.id;
     user = await User.findById(user);
@@ -18,18 +18,51 @@ router.post("/save", [upload.array("files"), fetchuser], async (req, res) => {
       return;
     }
 
-    if (!req.files[0].url)
-      return res.status(500).json({ error: "Error while uploading files" });
+    let {
+      fullName,
+      rollNum,
+      fatherName,
+      motherName,
+      gender,
+      dob,
+      bloodGroup,
+      adhaarNum,
+      address,
+      branch,
+      year,
+      email,
+      imageUrl,
+    } = req.body;
+
+    console.log(req.file);
+    if(!req.file.url)
+      return res.status(500).json({erro: "Error while connecting to AWS"});
 
     await Doc.create({
       userId: user._id,
-      docs: req.files,
+      docs: req.file.url,
       rollNum: user.rollNum,
-      verified: false
+      verified: false,
+      info: {
+        fullName,
+        rollNum,
+        fatherName,
+        motherName,
+        gender,
+        dob,
+        bloodGroup,
+        adhaarNum,
+        address,
+        branch,
+        year,
+        email,
+      },
+      img: imageUrl,
     });
 
     res.status(200).json({ message: "Upload successful!" });
   } catch (error) {
+    console.log("error: ", error);
     res.json({ error: "Server Error in saving documents route" });
   }
 });
@@ -47,6 +80,25 @@ router.get("/fetch", fetchuser, async (req, res) => {
     });
   } catch (error) {
     res.json({ error: "Server Error in fetching documents route" });
+  }
+});
+
+router.post("/image", [upload.single("file"), fetchuser], async (req, res) => {
+  try {
+    let user = req.user.id;
+    user = await User.findById(user);
+    if (!user) {
+      res.status(404).json({ error: "Invalid Credentials" });
+      return;
+    }
+    console.log(req.file)
+    if (!req.file.url)
+      return res.status(500).json({ error: "Error while uploading files" });
+
+    res.status(200).json({ url: req.file.url });
+  } catch (error) {
+    console.log(error)
+    res.json({ error: "Server Error in saving documents route" });
   }
 });
 
