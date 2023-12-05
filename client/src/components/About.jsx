@@ -56,15 +56,6 @@ function About() {
         methods to complete your registration hassle-free.
       </p>
       </div>
-      <div className="bg-[#5379836c] flex flex-row justify-center rounded-full p-3 m-2">
-      <div className="bg-[#31525bcf] md:text-2xl text-lg font-bold flex-none items-center  w-1/3 flex justify-center rounded-full" >Blockchain Integration </div>
-      <p className="md:text-lg text-s">
-        For those who prioritize an extra layer of security and transparency, we
-        offer blockchain integration for payment processing. Blockchain
-        technology ensures tamper-proof transactions, providing an added level
-        of trust and reliability.
-      </p>
-      </div>
       </div>
       <div className="flex flex-col justify-center ">
       <h1  className="font-extrabold p-4 text-2xl md:text-4xl ">Our Commitment</h1>

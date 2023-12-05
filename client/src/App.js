@@ -13,6 +13,7 @@ import Payment from "./components/payment/Payment";
 import HostelRegistrationForm from "./components/hostel/Registrationform";
 import About from "./components/About";
 
+
 const router = createBrowserRouter([
   {
     path: "/",

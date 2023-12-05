@@ -36,22 +36,9 @@ const HostelRegistrationForm = () => {
     });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:5000/api/submit-form', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-  
-      const data = await response.json();
-      console.log('Server Response:', data);
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    // Add your form submission logic here
     console.log('Form submitted:', formData);
   };
 
