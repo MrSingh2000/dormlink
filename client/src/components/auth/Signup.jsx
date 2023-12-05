@@ -24,7 +24,10 @@ const SignupForm = () => {
   const validateData = () => {
     if (!data.fullName || !data.rollNum || !data.password || !data.email)
       return false;
+
     if (data.rollNum.toString().length !== 11) return false;
+
+    return true;
   };
 
   const handleChange = (e) => {
@@ -37,7 +40,10 @@ const SignupForm = () => {
     e.preventDefault();
 
     // TODO: add toastify here
-    if (!validateData()) return;
+    if (!validateData()) {
+      alert("invalid data");
+      return;
+    }
 
     dispatch(updateLoading());
     await axios({

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import loginImage from "../../../images/logo.png"; // Import your login image
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { updateLoading } from "../../../redux/slices/loaderSlice";
 import { setAuthToken } from "../../../redux/slices/authSlice";
