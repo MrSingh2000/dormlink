@@ -12,6 +12,9 @@ import RoomChart from "./components/hostel/RoomChart";
 import Payment from "./components/payment/Payment";
 import HostelRegistrationForm from "./components/hostel/Registrationform";
 import About from "./components/About";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setAuthToken } from "./redux/slices/authSlice";
 
 const router = createBrowserRouter([
   {
@@ -29,24 +32,24 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About/>,
+        element: <About />,
       },
       {
         path: "/roomchart",
-        element: <RoomChart />
+        element: <RoomChart />,
       },
       {
         path: "/payment",
-        element: <Payment />
+        element: <Payment />,
       },
       {
         path: "/register",
-        element: <HostelRegistrationForm/>
+        element: <HostelRegistrationForm />,
       },
       {
         path: "/admindashboard",
-        element: <AdminDashboard/>
-      }
+        element: <AdminDashboard />,
+      },
     ],
   },
   {
@@ -64,6 +67,13 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const authToken = localStorage.getItem("authToken");
+    if (authToken) dispatch(setAuthToken({ token: authToken, type: "user" }));
+  }, []);
+
   return (
     <>
       <RouterProvider router={router} />
