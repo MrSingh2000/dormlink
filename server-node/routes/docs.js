@@ -12,6 +12,7 @@ require("dotenv").config();
 router.post("/save", [upload.single("file"), fetchuser], async (req, res) => {
   try {
     let user = req.user.id;
+    user = new mongoose.Types.ObjectId(user);
     user = await User.findById(user);
     if (!user) {
       res.status(404).json({ error: "Invalid Credentials" });
@@ -70,6 +71,8 @@ router.post("/save", [upload.single("file"), fetchuser], async (req, res) => {
 router.get("/fetch", fetchuser, async (req, res) => {
   try {
     let user = req.user.id;
+    user = new mongoose.Types.ObjectId(user);
+
     user = await User.findById(user);
     if (!user) return res.status(404).json({ error: "Invalid Credentials" });
 
@@ -86,6 +89,8 @@ router.get("/fetch", fetchuser, async (req, res) => {
 router.post("/image", [upload.single("file"), fetchuser], async (req, res) => {
   try {
     let user = req.user.id;
+    user = new mongoose.Types.ObjectId(user);
+
     user = await User.findById(user);
     if (!user) {
       res.status(404).json({ error: "Invalid Credentials" });

@@ -13,6 +13,7 @@ require("dotenv").config();
 router.get("/fetch", fetchuser, async (req, res) => {
   try {
     let { id, type } = req.user;
+    id = new mongoose.Types.ObjectId(id);
 
     if (type !== "admin")
       return res.status(404).json({ error: "Unauthenticated Access" });
@@ -30,6 +31,8 @@ router.get("/fetch", fetchuser, async (req, res) => {
 const userData = async (req, res, update = true) => {
   try {
     let { id, type } = req.user;
+    id = new mongoose.Types.ObjectId(id);
+
     let updateId = req.query.updateId;
     if (type !== "admin")
       return res.status(404).json({ error: "Unauthenticated Access" });
