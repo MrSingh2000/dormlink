@@ -27,6 +27,7 @@ const documentSchema = new Schema({
     address: { type: String },
     branch: { type: String },
     year: { type: String },
+    email: { type: String },
   },
   img: {
     type: String,
