@@ -1,6 +1,5 @@
 import React from 'react';
 import './card.css'
-import imageUrl from '../../images/avatar.png'
 
 const CardFlip = (props) => {
   const {img, doc, info} = props;
