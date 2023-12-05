@@ -1,6 +1,6 @@
 // HomePage.js
 import React, { useState, useEffect } from "react";
-import bot from '../images/bot.png';
+import bot from "../images/bot.png";
 
 // Import your carousel images
 import image1 from "../images/1.jpg";
@@ -8,22 +8,29 @@ import image2 from "../images/2.jpg";
 import image3 from "../images/3.jpg";
 import image4 from "../images/4.jpg";
 import image5 from "../images/5.jpg";
+import { setAuthToken } from "../redux/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const images = [image1, image2, image3, image4, image5];
 
 const HomePage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 5000); // Change the time (in milliseconds) to control image change interval
 
+    const authToken = localStorage.getItem("authToken");
+    if (authToken) dispatch(setAuthToken({ token: authToken, type: "user" }));
+
     return () => {
       clearInterval(interval);
     };
   }, []);
- const url ='https://mediafiles.botpress.cloud/0014d546-8e66-425d-bca2-e1ee392f697f/webchat/bot.html';
+  const url =
+    "https://mediafiles.botpress.cloud/0014d546-8e66-425d-bca2-e1ee392f697f/webchat/bot.html";
   return (
     <div className="relative">
       <div className="h-screen relative overflow-hidden">
@@ -49,9 +56,12 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <button className="object-left sticky content-end  bottom-4 right-4 bg-[#31525b] text-white px-4 py-2 rounded-full shadow-md hover:bg-[#31525bb7]" onClick={() => window.open(url, '_blank')} >
-        <img src={bot} alt="bot" style={{height:"10vh"}}/>
-  </button>
+      <button
+        className="object-left sticky content-end  bottom-4 right-4 bg-[#31525b] text-white px-4 py-2 rounded-full shadow-md hover:bg-[#31525bb7]"
+        onClick={() => window.open(url, "_blank")}
+      >
+        <img src={bot} alt="bot" style={{ height: "10vh" }} />
+      </button>
     </div>
   );
 };

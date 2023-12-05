@@ -13,6 +13,8 @@ const Room = ({ roomNum, id, isSelected, onSelect }) => (
 );
 
 const RoomChart = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedHostel, setSelectedHostel] = useState('BH1')
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [allRooms, setAllRooms] = useState([]);
   const hostel = Object.freeze({
@@ -39,10 +41,40 @@ const RoomChart = () => {
     setAllRooms(newRooms);
   };
 
+
   // Generate an array of seat components
   useEffect(() => {
     let rooms = [];
-    for (let i = 0; i < hostel.KCH; i++) {
+
+    let hRooms;
+    switch (selectedHostel) {
+      case 'BH1':
+        hRooms = hostel.BH1;
+        break;
+        case 'BH2':
+        hRooms = hostel.BH2;
+        break;
+        case 'BH3':
+        hRooms = hostel.BH3;
+        break;
+        case 'BH4':
+        hRooms = hostel.BH4;
+        break;
+        case 'GH':
+        hRooms = hostel.GH;
+        break;
+        case 'KCH':
+        hRooms = hostel.KCH;
+        break;
+        case 'MTH':
+        hRooms = hostel.MTH;
+        break;
+    
+      default:
+        break;
+    }
+
+    for (let i = 0; i < hRooms; i++) {
       rooms.push({
         id: i,
         roomNum: i + 101,
@@ -51,7 +83,7 @@ const RoomChart = () => {
       });
       setAllRooms(rooms);
     }
-  }, []);
+  }, [selectedHostel]);
 
   const handleSubmit = () => {
     console.log("send room details");
@@ -61,6 +93,109 @@ const RoomChart = () => {
   return (
     <div className="bg-white min-h-screen flex flex-col justify-center">
       <div className="seat-chart min-w-1/3">
+
+      <div className="w-full flex justify-center">
+        
+        <div className="relative inline-block text-left">
+          <div className="">
+            <button
+              type="button"
+              className=" border border-gray-300 bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center w-full rounded-md  px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+              id="options-menu"
+              onClick={() => setShowDropdown((prev) => !prev)}
+            >
+              {selectedHostel}
+              <svg
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 1792 1792"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M1408 704q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45z"></path>
+              </svg>
+            </button>
+          </div>
+          {showDropdown && (<div className={`opacity-0 scale-95 transform transition-all ease-in-out duration-700 ${
+              showDropdown ? "opacity-100" : "scale-100"
+            } absolute right-0 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg dark:bg-gray-800 ring-1 ring-black ring-opacity-5`}>
+            <div
+              className="py-1 "
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="options-menu"
+            >
+              <div
+                onClick={() => {setSelectedHostel('BH1'); setShowDropdown(false);}}
+                className="cursor-pointer block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                role="menuitem"
+              >
+                <span className="flex flex-col">
+                  <span>BH1</span>
+                </span>
+              </div>
+              <div
+                onClick={() => {setSelectedHostel('BH2'); setShowDropdown(false);}}
+                className="cursor-pointer block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                role="menuitem"
+              >
+                <span className="flex flex-col">
+                  <span>BH2</span>
+                </span>
+              </div>
+              <div
+                onClick={() => {setSelectedHostel('BH3'); setShowDropdown(false);}}
+                className="cursor-pointer block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                role="menuitem"
+              >
+                <span className="flex flex-col">
+                  <span>BH3</span>
+                </span>
+              </div>
+              <div
+                onClick={() => {setSelectedHostel('BH4'); setShowDropdown(false);}}
+                className="cursor-pointer block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                role="menuitem"
+              >
+                <span className="flex flex-col">
+                  <span>BH4</span>
+                </span>
+              </div>
+              <div
+                onClick={() =>{ setSelectedHostel('GH'); setShowDropdown(false);}}
+                className="cursor-pointerk block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                role="menuitem"
+              >
+                <span className="flex flex-col">
+                  <span>GH</span>
+                </span>
+              </div>
+              <div
+                onClick={() => {setSelectedHostel('KCH'); setShowDropdown(false);}}
+                className="cursor-pointer block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                role="menuitem"
+              >
+                <span className="flex flex-col">
+                  <span>KCH</span>
+                </span>
+              </div>
+              <div
+                onClick={() => {setSelectedHostel('MTH'); setShowDropdown(false);}}
+                className="cursor-pointer block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                role="menuitem"
+              >
+                <span className="flex flex-col">
+                  <span>MTH</span>
+                </span>
+              </div>
+             
+            </div>
+          </div>)}
+        </div>
+
+      </div>
+
+
         <h2 className="text-center bg-[#ffa101] p-4 my-4 rounded-xl text-xl font-bold text-white">
           Select Your Room
         </h2>
@@ -82,7 +217,7 @@ const RoomChart = () => {
       <div className="flex justify-center w-full">
         <button
           type="button"
-          class="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg max-w-lg"
+          className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg max-w-lg"
         >
           Select
         </button>
