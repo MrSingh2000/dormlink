@@ -42,6 +42,8 @@ const AdminLogin = () => {
       data,
     })
       .then((res) => {
+        localStorage.setItem('authToken', res.data.authToken);
+        localStorage.setItem('type', "admin");
         dispatch(setAuthToken({ token: res.data.authToken, type: "admin" }));
         localStorage.setItem('authToken', res.data.authToken);
         // showToast("Registeration Successfull!");

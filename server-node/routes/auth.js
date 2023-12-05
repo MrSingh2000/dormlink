@@ -5,6 +5,8 @@ const User = require("../models/User");
 const Admin = require("../models/Admin01");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const mongoose = require('mongoose');
+
 require("dotenv").config();
 
 const loginUser = async (req, res, Model, type) => {

@@ -47,6 +47,8 @@ const LoginForm = () => {
       data,
     })
       .then((res) => {
+        localStorage.setItem('type', "user");
+        localStorage.setItem('authToken', res.data.authToken);
         dispatch(setAuthToken({ token: res.data.authToken, type: "user" }));
         localStorage.setItem('authToken', res.data.authToken);
         // showToast("Registeration Successfull!");

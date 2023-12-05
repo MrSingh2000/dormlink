@@ -71,7 +71,8 @@ function App() {
 
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
-    if (authToken) dispatch(setAuthToken({ token: authToken, type: "user" }));
+    const userType = localStorage.getItem("type");
+    if (authToken) dispatch(setAuthToken({ token: authToken, type: userType }));
   }, []);
 
   return (

@@ -52,6 +52,8 @@ const SignupForm = () => {
       data,
     })
       .then((res) => {
+        localStorage.setItem('authToken', res.data.authToken);
+        localStorage.setItem('type', "user");
         dispatch(setAuthToken({ token: res.data.authToken, type: "user" }));
         localStorage.setItem('authToken', res.data.authToken);
         // showToast("Registeration Successfull!");

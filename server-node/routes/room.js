@@ -46,6 +46,8 @@ router.post("/update", fetchuser, async (req, res) => {
 router.get("/fetch", fetchuser, async (req, res) => {
   try {
     let { id } = req.user;
+    id = new mongoose.Types.ObjectId(id);
+
     let user = await User.findById(id);
     if (!user) return res.status(401).json({ error: "Invalid Credentials" });
 

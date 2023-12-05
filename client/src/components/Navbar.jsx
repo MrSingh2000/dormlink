@@ -4,9 +4,11 @@ import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import { ToastContainer } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuthToken } from "../redux/slices/authSlice";
 
 export default function Navbar() {
+  const dispatch = useDispatch();
   const [openham, setOpenham] = useState(false);
   const authProperty = useSelector((store) => store.authToken);
 
@@ -28,7 +30,21 @@ export default function Navbar() {
                   type="button"
                   className="text-white bg-[#31525b] hover:bg-[#458c97] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-4 py-2 text-center mr-3 md:mr-0 dark:bg-[#31525b] dark:hover:bg-blue-700 dark:focus:ring-blue-800 "
                 >
-                  <Link to={"/register"}>Register</Link>
+                  {authProperty.type === "user" ? (
+                    <Link to={"/register"}>Register</Link>
+                  ) : (
+                    <Link to={"/admindashboard"}>Dashboard</Link>
+                  )}
+                </button>
+                <button
+                  type="button"
+                  className="text-white ml-3 bg-[#31525b] hover:bg-[#458c97] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-4 py-2 text-center mr-3 md:mr-0 dark:bg-[#31525b] dark:hover:bg-blue-700 dark:focus:ring-blue-800 "
+                  onClick={() => {
+                    localStorage.clear();
+                    dispatch(setAuthToken({ token: "", type: "" }));
+                  }}
+                >
+                  LogOut
                 </button>
               </div>
             ) : (
